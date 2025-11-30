@@ -4,6 +4,7 @@ using DevTrails___BankProject.Enums;
 using DevTrails___BankProject.Entities;
 using DevTrails___BankProject.Service.Interfaces;
 using DevTrails___BankProject.Repositories.Interfaces;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DevTrails___BankProject.Service
 {
@@ -70,13 +71,13 @@ namespace DevTrails___BankProject.Service
                 var fromAccount = await _accountRepository.GetByNumberAsync(model.FromAccountNumber);
                 var toAccount = await _accountRepository.GetByNumberAsync(model.ToAccountNumber);
 
+                if (fromAccount == null) throw new KeyNotFoundException($"Origem {model.FromAccountNumber} não encontrada.");
+                if (toAccount == null) throw new KeyNotFoundException($"Destino {model.ToAccountNumber} não encontrada.");
+
                 if (fromAccount.Client.UserId != userId)
                 {
                     throw new UnauthorizedAccessException("Você não pode transferir de uma conta que não é sua.");
                 }
-
-                if (fromAccount == null) throw new KeyNotFoundException($"Origem {model.FromAccountNumber} não encontrada.");
-                if (toAccount == null) throw new KeyNotFoundException($"Destino {model.ToAccountNumber} não encontrada.");
 
                 if (fromAccount.AccountStatus != AccountStatus.Active) throw new InvalidOperationException("Conta de origem inativa.");
                 if (toAccount.AccountStatus != AccountStatus.Active) throw new InvalidOperationException("Conta de destino inativa.");
@@ -92,32 +93,42 @@ namespace DevTrails___BankProject.Service
                 fromAccount.Balance -= totalDebit;
                 toAccount.Balance += model.Amount;
 
-                var transaction = new Transaction
+                var sentTransaction = new Transaction
                 {
                     Id = Guid.NewGuid(),
-                    Amount = model.Amount,
+                    Amount = -model.Amount, 
                     Date = DateTime.UtcNow,
-                    Type = TransactionType.Transfer,
-                    Description = $"Transferência para {toAccount.Number}",
+                    Type = TransactionType.TransferSent,                                 
+                    Description = $"Transferência enviada para {toAccount.Number}",
                     FromAccountId = fromAccount.AccountID,
+                    ToAccountId = toAccount.AccountID 
+                };
+
+                var receivedTransaction = new Transaction
+                {
+                    Id = Guid.NewGuid(),
+                    Amount = model.Amount, 
+                    Date = DateTime.UtcNow,
+                    Type = TransactionType.TransferReceived, 
+                    Description = $"Transferência recebida de {fromAccount.Number}",
                     ToAccountId = toAccount.AccountID
                 };
 
                 var feeTransaction = new Transaction
                 {
                     Id = Guid.NewGuid(),
-                    Amount = fee,
+                    Amount = -fee,
                     Date = DateTime.UtcNow,
                     Type = TransactionType.ServiceFee,
                     Description = "Taxa de Transferência",
                     FromAccountId = fromAccount.AccountID
                 };
 
-                await _transactionRepository.AddMultipleTransactionsAsync(transaction, feeTransaction);
+                await _transactionRepository.AddMultipleTransactionsAsync(sentTransaction, receivedTransaction, feeTransaction);
 
                 await _unitOfWork.CommitAsync();
 
-                return TransactionViewModel.FromModel(transaction);
+                return TransactionViewModel.FromModel(sentTransaction);
             }
             catch
             {
@@ -149,7 +160,7 @@ namespace DevTrails___BankProject.Service
                 var transaction = new Transaction
                 {
                     Id = Guid.NewGuid(),
-                    Amount = model.Amount,
+                    Amount = -model.Amount,
                     Date = DateTime.UtcNow,
                     Type = TransactionType.Withdraw,
                     Description = "Saque",

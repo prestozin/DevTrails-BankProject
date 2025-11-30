@@ -45,7 +45,7 @@ namespace DevTrails___BankProject.Service
                     AccountType = model.AccountType
                 };
 
-                await _accountService.CreateAccountAsync(account);
+                await _accountService.CreateAccountAsync(account, userId);
                 await _unitOfWork.CommitAsync();
 
                 var resultClient = await _clientRepository.GetByCpfAsync(model.CPF);

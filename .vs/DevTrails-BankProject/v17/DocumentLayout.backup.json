@@ -1,0 +1,207 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|c:\\users\\mateu\\documents\\github\\devtrails-bankproject\\src\\service\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|solutionrelative:src\\service\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|c:\\users\\mateu\\documents\\github\\devtrails-bankproject\\src\\dtos\\viewmodel\\transactionviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|solutionrelative:src\\dtos\\viewmodel\\transactionviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|c:\\users\\mateu\\documents\\github\\devtrails-bankproject\\src\\repositories\\transactionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|solutionrelative:src\\repositories\\transactionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|c:\\users\\mateu\\documents\\github\\devtrails-bankproject\\src\\enums\\transactiontype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|solutionrelative:src\\enums\\transactiontype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|c:\\users\\mateu\\documents\\github\\devtrails-bankproject\\src\\service\\clientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|solutionrelative:src\\service\\clientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|c:\\users\\mateu\\documents\\github\\devtrails-bankproject\\src\\controllers\\accountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|solutionrelative:src\\controllers\\accountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|c:\\users\\mateu\\documents\\github\\devtrails-bankproject\\src\\service\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|solutionrelative:src\\service\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|c:\\users\\mateu\\documents\\github\\devtrails-bankproject\\src\\service\\interfaces\\iaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|solutionrelative:src\\service\\interfaces\\iaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|c:\\users\\mateu\\documents\\github\\devtrails-bankproject\\src\\repositories\\accountrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|solutionrelative:src\\repositories\\accountrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|c:\\users\\mateu\\documents\\github\\devtrails-bankproject\\src\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|solutionrelative:src\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|c:\\users\\mateu\\documents\\github\\devtrails-bankproject\\src\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{388C23D9-497B-49CC-B2E3-40C9A4E2F340}|DevTrails - BankProject.API.csproj|solutionrelative:src\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TransactionType.cs",
+              "DocumentMoniker": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Enums\\TransactionType.cs",
+              "RelativeDocumentMoniker": "src\\Enums\\TransactionType.cs",
+              "ToolTip": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Enums\\TransactionType.cs",
+              "RelativeToolTip": "src\\Enums\\TransactionType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T20:39:46.37Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TransactionRepository.cs",
+              "DocumentMoniker": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Repositories\\TransactionRepository.cs",
+              "RelativeDocumentMoniker": "src\\Repositories\\TransactionRepository.cs",
+              "ToolTip": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Repositories\\TransactionRepository.cs",
+              "RelativeToolTip": "src\\Repositories\\TransactionRepository.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAIwDEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T20:28:09.11Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TransactionService.cs",
+              "DocumentMoniker": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Service\\TransactionService.cs",
+              "RelativeDocumentMoniker": "src\\Service\\TransactionService.cs",
+              "ToolTip": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Service\\TransactionService.cs",
+              "RelativeToolTip": "src\\Service\\TransactionService.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAowFAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T20:25:01.34Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TransactionViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\DTOs\\ViewModel\\TransactionViewModel.cs",
+              "RelativeDocumentMoniker": "src\\DTOs\\ViewModel\\TransactionViewModel.cs",
+              "ToolTip": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\DTOs\\ViewModel\\TransactionViewModel.cs",
+              "RelativeToolTip": "src\\DTOs\\ViewModel\\TransactionViewModel.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAswBUAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T20:08:13.802Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ClientService.cs",
+              "DocumentMoniker": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Service\\ClientService.cs",
+              "RelativeDocumentMoniker": "src\\Service\\ClientService.cs",
+              "ToolTip": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Service\\ClientService.cs",
+              "RelativeToolTip": "src\\Service\\ClientService.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAA5wCcAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T19:59:37.984Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IAccountService.cs",
+              "DocumentMoniker": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Service\\Interfaces\\IAccountService.cs",
+              "RelativeDocumentMoniker": "src\\Service\\Interfaces\\IAccountService.cs",
+              "ToolTip": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Service\\Interfaces\\IAccountService.cs",
+              "RelativeToolTip": "src\\Service\\Interfaces\\IAccountService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T19:55:41.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AccountRepository.cs",
+              "DocumentMoniker": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Repositories\\AccountRepository.cs",
+              "RelativeDocumentMoniker": "src\\Repositories\\AccountRepository.cs",
+              "ToolTip": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Repositories\\AccountRepository.cs",
+              "RelativeToolTip": "src\\Repositories\\AccountRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T19:55:30.408Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AccountService.cs",
+              "DocumentMoniker": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Service\\AccountService.cs",
+              "RelativeDocumentMoniker": "src\\Service\\AccountService.cs",
+              "ToolTip": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Service\\AccountService.cs",
+              "RelativeToolTip": "src\\Service\\AccountService.cs",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAIwEkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T19:54:04.843Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AccountsController.cs",
+              "DocumentMoniker": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Controllers\\AccountsController.cs",
+              "RelativeDocumentMoniker": "src\\Controllers\\AccountsController.cs",
+              "ToolTip": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Controllers\\AccountsController.cs",
+              "RelativeToolTip": "src\\Controllers\\AccountsController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAowBkAAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T19:53:03.542Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Program.cs",
+              "RelativeDocumentMoniker": "src\\Program.cs",
+              "ToolTip": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Program.cs",
+              "RelativeToolTip": "src\\Program.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T18:52:49.924Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Dockerfile",
+              "RelativeDocumentMoniker": "src\\Dockerfile",
+              "ToolTip": "C:\\Users\\mateu\\Documents\\GitHub\\DevTrails-BankProject\\src\\Dockerfile",
+              "RelativeToolTip": "src\\Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-30T18:52:49.163Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

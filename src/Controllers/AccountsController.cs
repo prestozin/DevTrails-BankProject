@@ -22,14 +22,16 @@ namespace DevTrails___BankProject.Controllers
         [HttpPost]
         public async Task<ActionResult<AccountViewModel>> CreateAccount([FromBody] AccountCreateModel model)
         {
-            var result = await _accountService.CreateAccountAsync(model);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = await _accountService.CreateAccountAsync(model, userId);
             return Created($"/api/contas/{result.AccountId}", result);
         }
 
         [HttpGet("cliente/{cpf}")]
         public async Task<ActionResult<List<AccountViewModel>>> GetAccountsByClient(string cpf)
         {
-            var result = await _accountService.GetAccountsByCpfAsync(cpf);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = await _accountService.GetAccountsByCpfAsync(cpf, userId);
             return Ok(result);
         }
 

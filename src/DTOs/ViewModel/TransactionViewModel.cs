@@ -13,26 +13,7 @@ namespace DevTrails___BankProject.DTOs
 
         public static TransactionViewModel FromModel(Transaction transaction, Guid? viewerAccountId = null)
         {
-            string formattedDescription = transaction.Description;
-
-            if (viewerAccountId.HasValue && transaction.Type == TransactionType.Transfer)
-            {
-
-                if (transaction.FromAccountId == viewerAccountId)
-                {
-                    var destinationNumber = transaction.ToAccount?.Number ?? "Desconhecido";
-                    formattedDescription = $"Transferência enviada para: {destinationNumber}";
-                }
-                else if (transaction.ToAccountId == viewerAccountId)
-                {
-                    var originNumber = transaction.FromAccount?.Number ?? "Desconhecido";
-                    formattedDescription = $"Transferência recebida de: {originNumber}";
-                }
-            }
-            if (transaction.Type == TransactionType.ServiceFee)
-            {
-                formattedDescription = "Tarifa bancária";
-            }
+            
 
             return new TransactionViewModel
             {
@@ -40,7 +21,7 @@ namespace DevTrails___BankProject.DTOs
                 Amount = transaction.Amount,
                 Date = transaction.Date,
                 Type = transaction.Type.ToString(),
-                Description = formattedDescription
+                Description = transaction.Description
             };
         }
     }

@@ -15,10 +15,15 @@ namespace DevTrails___BankProject.Service
           _accountRepository = accountRepository;
           _clientRepository = clientRepository;
         }
-        public async Task<AccountViewModel> CreateAccountAsync(AccountCreateModel model)
+        public async Task<AccountViewModel> CreateAccountAsync(AccountCreateModel model, string userId)
         {
             var client = await _clientRepository.GetByCpfAsync(model.CPF);
             if (client == null) throw new KeyNotFoundException("Cliente não encontrado.");
+
+            if (client.UserId != userId)
+            {
+                throw new UnauthorizedAccessException("Você não tem permissão para alterar esta conta.");
+            }
 
             Account newAccount;
 
@@ -58,10 +63,16 @@ namespace DevTrails___BankProject.Service
             createdAccount.Client = client;
             return AccountViewModel.FromModel(createdAccount);
         }
-        public async Task<List<AccountViewModel>> GetAccountsByCpfAsync(string cpf)
+        public async Task<List<AccountViewModel>> GetAccountsByCpfAsync(string cpf, string userId)
         {
-            var accounts = await _accountRepository.GetByClientCpfAsync(cpf);
+            var client = await _clientRepository.GetByCpfAsync(cpf);
 
+            if (client != null && client.UserId != userId)
+            {
+                throw new UnauthorizedAccessException("Você não tem permissão para ver contas deste CPF.");
+            }
+
+            var accounts = await _accountRepository.GetByClientCpfAsync(cpf);
             return accounts.Select(AccountViewModel.FromModel).ToList();
         }
     

@@ -1,5 +1,6 @@
 ﻿using DevTrails___BankProject.Data;
 using DevTrails___BankProject.Entities;
+using DevTrails___BankProject.Enums;
 using DevTrails___BankProject.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,8 +23,12 @@ namespace DevTrails___BankProject.Repositories
                 .AsNoTracking()
                 .Include(t => t.FromAccount) 
                 .Include(t => t.ToAccount)
-                .Where(t => t.FromAccountId == accountId || t.ToAccountId == accountId);
-            
+                .AsQueryable();
+
+            query = query.Where(t => (t.FromAccountId == accountId && t.Type != TransactionType.TransferReceived) ||
+                                     (t.ToAccountId == accountId && t.Type != TransactionType.TransferSent));
+
+
             if (start.HasValue)
             {
                 query = query.Where(t => t.Date >= start.Value.Date);
