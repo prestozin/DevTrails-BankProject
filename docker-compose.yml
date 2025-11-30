@@ -1,0 +1,33 @@
+﻿services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: bank_db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=SenhaForte@123 
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlvolume:/var/opt/mssql 
+
+  api:
+    image: bank-project-api
+    container_name: bank_api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:8080" 
+      - "5001:8081"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__BankDatabase=Server=db;Database=BankDb;User Id=sa;Password=SenhaForte@123;TrustServerCertificate=True;
+      - Jwt__Key=MinhaChaveSuperSecretaDoBancoDevTrails2025!
+      - Jwt__Issuer=DevTrailsBank
+      - Jwt__Audience=DevTrailsBank
+    depends_on:
+      - db 
+
+volumes:
+  sqlvolume:
