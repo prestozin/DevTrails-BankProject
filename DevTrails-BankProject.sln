@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevTrails - BankProject.API
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevTrails - BankProject.Tests", "..\..\..\source\repos\DevTrails - BankProject\DevTrails - BankProject.Tests\DevTrails - BankProject.Tests.csproj", "{0FB2282D-DFCD-4D7E-A429-B2B6D12AF54E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevTrails - BankProject.Tests", "tests\DevTrails - BankProject.Tests.csproj", "{C4DF9FD0-B18F-4533-B3CB-9D4217EB1850}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0FB2282D-DFCD-4D7E-A429-B2B6D12AF54E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FB2282D-DFCD-4D7E-A429-B2B6D12AF54E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FB2282D-DFCD-4D7E-A429-B2B6D12AF54E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4DF9FD0-B18F-4533-B3CB-9D4217EB1850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4DF9FD0-B18F-4533-B3CB-9D4217EB1850}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4DF9FD0-B18F-4533-B3CB-9D4217EB1850}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4DF9FD0-B18F-4533-B3CB-9D4217EB1850}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

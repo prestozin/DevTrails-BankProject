@@ -48,8 +48,7 @@ namespace DevTrails___BankProject.Service
                 await _accountService.CreateAccountAsync(account, userId);
                 await _unitOfWork.CommitAsync();
 
-                var resultClient = await _clientRepository.GetByCpfAsync(model.CPF);
-                return ClientViewModel.FromModel(resultClient);
+                return ClientViewModel.FromModel(client);
             }
             catch
             {
@@ -58,10 +57,15 @@ namespace DevTrails___BankProject.Service
             }
         }
 
-        public async Task<ClientViewModel?> GetClientByCpfAsync(string cpf)
+        public async Task<ClientViewModel?> GetClientByCpfAsync(string cpf, string userId)
         {
             var client = await _clientRepository.GetByCpfAsync(cpf);
             if (client == null) return null;
+
+            if (client.UserId != userId)
+            {
+                throw new UnauthorizedAccessException("Você não tem permissão para visualizar os dados deste cliente.");
+            }
 
             return ClientViewModel.FromModel(client);
         }

@@ -32,8 +32,11 @@ namespace DevTrails___BankProject.Controllers
         [HttpGet("cpf/{cpf}")]
         public async Task<ActionResult<ClientViewModel>> GetByCpf(string cpf)
         {
-            var client = await _clientService.GetClientByCpfAsync(cpf);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var client = await _clientService.GetClientByCpfAsync(cpf, userId);
             if (client == null) return NotFound("Cliente não encontrado.");
+
             return Ok(client);
         }
     }
