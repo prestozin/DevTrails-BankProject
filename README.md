@@ -2,13 +2,17 @@
 
 ![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat&logo=dotnet)
 ![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?style=flat&logo=docker)
-![SQL Server](https://img.shields.io/badge/SQL_Server-2022-CC2927?style=flat&logo=microsoft-sql-server)
+![SQL Server](https://img.shields.io/badge/SQL_Server-2022-CC2927?style=flat&logo=microsoft-sql-server)                                                      
 ![Tests](https://img.shields.io/badge/Tests-xUnit-102039?style=flat)
 
+<img width="300" height="300" alt="SP-Studio (1)" src="https://github.com/user-attachments/assets/bfc6b38f-8ae2-43dc-95eb-37d7fb2d8961" />
+
 Uma API bancária feita para o projeto DevTrails .NET da Solutis.
+
 ---
 
 ## Tecnologias utilizadas
+
 
 - **.NET 8**
 - **Entity Framework Core** 
@@ -61,7 +65,15 @@ Implementação de **Resource-Based Authorization**.
   - Um cliente pode ter apenas uma Conta Corrente e uma Conta Poupança.
   - Contas só podem ser inativadas se o saldo for zero.
   - Taxas automáticas aplicadas em transferências.
+  - Saldo Inicial Zero: Por segurança e consistência contábil, toda nova conta nasce com Saldo = 0.00.
+  - Cada tipo de conta tem sua própria taxa:
+  -   **Conta Corrente(CheckingAccount):** Tarifa de Manutenção: Possui uma taxa mensal fixa (Configurada em R$ 15,00).
+  -   **Conta Poupança(SavingsAccount):** Rentabilidade: Isenta de taxas de manutenção e possui rendimento automático de 0.5% sobre o saldo.
+  - **Transferências**: O sistema de transferências não altera apenas o saldo final. Para garantir auditoria completa, cada transferência gera 3 registros de transação: Taxa, Crédito e Débito.
 - **Validações:** CPF, maioridade (16+ anos), valores positivos, e e-mails válidos garantidos via `FluentValidation`.
+
+
+
 
 ---
 
@@ -74,15 +86,15 @@ O projeto foi configurado para rodar utilizando o Docker Compose.
 **Para rodar, faça os seguintes passos:**
 
 1. Clone o repositório:
-   ```bash
+     ```bash
    git clone https://github.com/prestozin/DevTrails-BankProject.git
 
 2. Abra o terminal na sua IDE e suba os containers:
-   ```bash
+     ```bash
     docker-compose up --build
   
 3. Acesse o Swagger:
-    ```bash
+      ```bash
     http://localhost:5000/swagger
 
   ---
