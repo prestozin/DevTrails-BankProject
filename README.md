@@ -75,9 +75,9 @@ O projeto foi configurado para rodar utilizando o Docker Compose.
 
 1. Clone o repositório:
    ```bash
-   git clone [https://github.com/seu-usuario/DevTrails-BankProject.git](https://github.com/seu-usuario/DevTrails-BankProject.git)](https://github.com/prestozin/DevTrails-BankProject.git)
+   git clone https://github.com/prestozin/DevTrails-BankProject.git
 
-2. Suba os containers:
+2. Abra o terminal na sua IDE e suba os containers:
    ```bash
     docker-compose up --build
   
