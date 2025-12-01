@@ -1,10 +1,8 @@
-﻿using DevTrails___BankProject.Data;
-using DevTrails___BankProject.DTOs;
+﻿using DevTrails___BankProject.DTOs;
 using DevTrails___BankProject.Enums;
 using DevTrails___BankProject.Entities;
 using DevTrails___BankProject.Service.Interfaces;
 using DevTrails___BankProject.Repositories.Interfaces;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DevTrails___BankProject.Service
 {
@@ -181,6 +179,16 @@ namespace DevTrails___BankProject.Service
 
         public async Task<List<TransactionViewModel>> GetAccountStatementAsync(string accountNumber, DateTime? start, DateTime? end, int pageNumber, int pageSize, string userId)
         {
+            if (pageNumber < 1 || pageSize < 1)
+            {
+                throw new ArgumentException("Página e tamanho devem ser maiores que zero.");
+            }
+               
+            if (start.HasValue && end.HasValue && start > end)
+            {
+                throw new ArgumentException("A data final não pode ser menor que a data inicial.");
+            }
+                
             var account = await _accountRepository.GetByNumberAsync(accountNumber);
             if (account == null) throw new KeyNotFoundException($"Conta {accountNumber} não encontrada.");
 

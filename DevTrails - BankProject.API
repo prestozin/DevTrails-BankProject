@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevTrails - BankProject.API", "src\DevTrails - BankProject.API.csproj", "{84EAABD6-1012-47B4-8722-9EE77F55F620}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84EAABD6-1012-47B4-8722-9EE77F55F620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84EAABD6-1012-47B4-8722-9EE77F55F620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84EAABD6-1012-47B4-8722-9EE77F55F620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84EAABD6-1012-47B4-8722-9EE77F55F620}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

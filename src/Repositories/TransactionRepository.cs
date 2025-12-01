@@ -25,7 +25,7 @@ namespace DevTrails___BankProject.Repositories
                 .Include(t => t.ToAccount)
                 .AsQueryable();
 
-            query = query.Where(t => (t.FromAccountId == accountId && t.Type != TransactionType.TransferReceived) ||
+            query = query.Where(t => (t.FromAccountId == accountId && t.Type != TransactionType.TransferReceived)||
                                      (t.ToAccountId == accountId && t.Type != TransactionType.TransferSent));
 
 

@@ -1,5 +1,4 @@
 ﻿using DevTrails___BankProject.DTOs;
-using DevTrails___BankProject.Entities;
 
 namespace DevTrails___BankProject.Service.Interfaces
 {

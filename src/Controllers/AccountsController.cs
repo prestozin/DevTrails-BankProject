@@ -53,8 +53,8 @@ namespace DevTrails___BankProject.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            await _accountService.InactivateAccountAsync(accountNumber, userId);
-            return NoContent();
+            var result = await _accountService.InactivateAccountAsync(accountNumber, userId);
+            return Ok(result);
         }
 
         [HttpPatch("{accountNumber}/ativar")]

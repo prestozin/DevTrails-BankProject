@@ -1,5 +1,4 @@
-﻿using DevTrails___BankProject.Data;
-using DevTrails___BankProject.Entities;
+﻿using DevTrails___BankProject.Entities;
 using DevTrails___BankProject.Service.Interfaces;
 using DevTrails___BankProject.Repositories.Interfaces;
 using DevTrails___BankProject.DTOs;

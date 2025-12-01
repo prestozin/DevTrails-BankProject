@@ -7,7 +7,7 @@ namespace DevTrails___BankProject.DTOs
         public Guid AccountId { get; set; }
         public string? Number { get; set; }
         public string? AccountType { get; set; }
-        public decimal Balance { get; set; }
+        public decimal? Balance { get; set; }
         public string? Status { get; set; }
 
         public string? ClientName { get; set; }

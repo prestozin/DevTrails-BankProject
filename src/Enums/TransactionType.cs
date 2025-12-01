@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace DevTrails___BankProject.Enums
+﻿namespace DevTrails___BankProject.Enums
 {
     public enum TransactionType
     {

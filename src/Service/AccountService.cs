@@ -74,9 +74,8 @@ namespace DevTrails___BankProject.Service
 
             var accounts = await _accountRepository.GetByClientCpfAsync(cpf);
             return accounts.Select(AccountViewModel.FromModel).ToList();
-        }
-    
-        public async Task InactivateAccountAsync(string accountNumber, string userId)
+        }  
+        public async Task<AccountViewModel> InactivateAccountAsync(string accountNumber, string userId)
         {
             var account = await _accountRepository.GetByNumberAsync(accountNumber);
             if (account == null) throw new KeyNotFoundException("Conta não encontrada.");
@@ -98,8 +97,9 @@ namespace DevTrails___BankProject.Service
 
             account.AccountStatus = AccountStatus.Inactive;
             await _accountRepository.SaveChangesAsync();
-        }
 
+            return AccountViewModel.FromModel(account);
+        }
         public async Task<AccountViewModel> ReactivateAccountAsync(string accountNumber, string userId)
         {
             var account = await _accountRepository.GetByNumberAsync(accountNumber);

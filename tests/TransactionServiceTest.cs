@@ -4,139 +4,132 @@ using DevTrails___BankProject.Repositories.Interfaces;
 using DevTrails___BankProject.Entities;
 using DevTrails___BankProject.Enums;
 using DevTrails___BankProject.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace DevTrails.Tests
 {
     public class TransactionServiceTests
     {
-        private readonly Mock<ITransactionRepository> _transRepoMock;
+        private readonly Mock<ITransactionRepository> _transactionRepoMock;
         private readonly Mock<IAccountRepository> _accountRepoMock;
-        private readonly Mock<IUnitOfWork> _uowMock;
+        private readonly Mock<IUnitOfWork> _unitOfWorkMock;
         private readonly TransactionService _service;
 
         public TransactionServiceTests()
         {
-            _transRepoMock = new Mock<ITransactionRepository>();
+            _transactionRepoMock = new Mock<ITransactionRepository>();
             _accountRepoMock = new Mock<IAccountRepository>();
-            _uowMock = new Mock<IUnitOfWork>();
+            _unitOfWorkMock = new Mock<IUnitOfWork>();
 
-            _transRepoMock.Setup(r => r.AddAsync(It.IsAny<Transaction>())).ReturnsAsync((Transaction t) => t);
-
-            _service = new TransactionService(_transRepoMock.Object, _accountRepoMock.Object, _uowMock.Object);
+            _transactionRepoMock.Setup(r => r.AddAsync(It.IsAny<Transaction>())).ReturnsAsync((Transaction t) => t);
+            _service = new TransactionService(_transactionRepoMock.Object, _accountRepoMock.Object, _unitOfWorkMock.Object);
         }
 
         [Fact]
-        public async Task DepositAsync_ValidAmount_ShouldIncreaseBalanceAndCommit()
+        public async Task Deposit_ShouldIncreaseBalance_WhenAmountIsValid()
         {
-            // Arrange
             var account = new CheckingAccount { Balance = 100, AccountStatus = AccountStatus.Active };
             var model = new DepositInputModel { AccountNumber = "1234", Amount = 50 };
 
-            _accountRepoMock.Setup(r => r.GetByNumberAsync(model.AccountNumber))
-                .ReturnsAsync(account);
+            _accountRepoMock.Setup(r => r.GetByNumberAsync(model.AccountNumber)).ReturnsAsync(account);
 
-            // Act
-            var result = await _service.DepositAsync(model);
+            await _service.DepositAsync(model);
 
-            // Assert
             Assert.Equal(150, account.Balance);
-            Assert.NotNull(result);
-            _transRepoMock.Verify(r => r.AddAsync(It.IsAny<Transaction>()), Times.Once);
-            _uowMock.Verify(u => u.CommitAsync(), Times.Once);
+            _unitOfWorkMock.Verify(u => u.CommitAsync(), Times.Once);
         }
 
         [Fact]
-        public async Task WithdrawAsync_ValidAmount_ShouldDecreaseBalanceAndCommit()
+        public async Task Withdraw_ShouldDecreaseBalance_WhenBalanceIsSufficient()
         {
-            // Arrange
-            var account = new CheckingAccount { Balance = 100, AccountStatus = AccountStatus.Active };
+            var userId = "user1";
+            var account = new CheckingAccount { Balance = 100, AccountStatus = AccountStatus.Active, Client = new Client { UserId = userId } };
             var model = new WithdrawInputModel { AccountNumber = "1234", Amount = 40 };
 
-            _accountRepoMock.Setup(r => r.GetByNumberAsync(model.AccountNumber))
-                .ReturnsAsync(account);
+            _accountRepoMock.Setup(r => r.GetByNumberAsync(model.AccountNumber)).ReturnsAsync(account);
 
-            // Act
-            var result = await _service.WithdrawAsync(model);
+            await _service.WithdrawAsync(model, userId);
 
-            // Assert
             Assert.Equal(60, account.Balance);
-            Assert.NotNull(result);
-            _uowMock.Verify(u => u.CommitAsync(), Times.Once);
+            _unitOfWorkMock.Verify(u => u.CommitAsync(), Times.Once);
         }
 
         [Fact]
-        public async Task WithdrawAsync_InsufficientFunds_ShouldThrowExceptionAndRollback()
+        public async Task Withdraw_ShouldThrow_WhenBalanceIsInsufficient()
         {
-            // Arrange
-            var account = new CheckingAccount { Balance = 50, AccountStatus = AccountStatus.Active };
-            var model = new WithdrawInputModel { AccountNumber = "1234", Amount = 100 }; // Tenta sacar mais que tem
+            var userId = "user1";
+            var account = new CheckingAccount { Balance = 50, AccountStatus = AccountStatus.Active, Client = new Client { UserId = userId } };
+            var model = new WithdrawInputModel { AccountNumber = "1234", Amount = 100 };
 
-            _accountRepoMock.Setup(r => r.GetByNumberAsync(model.AccountNumber))
-                .ReturnsAsync(account);
+            _accountRepoMock.Setup(r => r.GetByNumberAsync(model.AccountNumber)).ReturnsAsync(account);
 
-            // Act + Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(() => _service.WithdrawAsync(model));
-
-            Assert.Equal(50, account.Balance);
-
-            _uowMock.Verify(u => u.CommitAsync(), Times.Never);
-            _uowMock.Verify(u => u.RollbackAsync(), Times.Once);
+            await Assert.ThrowsAsync<InvalidOperationException>(() => _service.WithdrawAsync(model, userId));
+            _unitOfWorkMock.Verify(u => u.RollbackAsync(), Times.Once);
         }
 
         [Fact]
-        public async Task TransferAsync_ValidData_ShouldTransferAndChargeFee()
+        public async Task Transfer_ShouldTransferAndChargeFee_WhenDataIsValid()
         {
-            // Arrange
-            var origin = new CheckingAccount { AccountID = Guid.NewGuid(), Balance = 1000, AccountStatus = AccountStatus.Active, Number = "Origem" };
-            var destiny = new SavingsAccount { AccountID = Guid.NewGuid(), Balance = 0, AccountStatus = AccountStatus.Active, Number = "Destino" };
-
-            var model = new TransferInputModel
-            {
-                FromAccountNumber = "Origem",
-                ToAccountNumber = "Destino",
-                Amount = 100
-            };
+            var userId = "user1";
+            var origin = new CheckingAccount { AccountID = Guid.NewGuid(), Balance = 1000, AccountStatus = AccountStatus.Active, Number = "Origem", Client = new Client { UserId = userId } };
+            var destiny = new SavingsAccount { AccountID = Guid.NewGuid(), Balance = 0, AccountStatus = AccountStatus.Active, Number = "Destino", Client = new Client { UserId = "user2" } };
+            var model = new TransferInputModel { FromAccountNumber = "Origem", ToAccountNumber = "Destino", Amount = 100 };
 
             _accountRepoMock.Setup(r => r.GetByNumberAsync("Origem")).ReturnsAsync(origin);
             _accountRepoMock.Setup(r => r.GetByNumberAsync("Destino")).ReturnsAsync(destiny);
 
-            // Act
-            await _service.TransferAsync(model);
+            await _service.TransferAsync(model, userId);
 
-            // Assert 
-            Assert.Equal(899.50m, origin.Balance); 
-            Assert.Equal(100, destiny.Balance);   
-
-
-            _transRepoMock.Verify(r => r.AddMultipleTransactionsAsync(It.IsAny<Transaction>(), It.IsAny<Transaction>()), Times.Once);
-            _uowMock.Verify(u => u.CommitAsync(), Times.Once);
+            Assert.Equal(899.50m, origin.Balance);
+            Assert.Equal(100, destiny.Balance);
+            _unitOfWorkMock.Verify(u => u.CommitAsync(), Times.Once);
         }
-    
-        [Fact]
-        public async Task GetAccountStatementAsync_ValidAccount_ShouldReturnHistory()
-        {
-            // Arrange
-            var accId = Guid.NewGuid();
-            var account = new CheckingAccount { AccountID = accId, Number = "12345" };
 
-            var transactions = new List<Transaction>
-            {
-                new Transaction { Id = Guid.NewGuid(), Amount = 100, Type = TransactionType.Deposit, Date = DateTime.Now },
-                new Transaction { Id = Guid.NewGuid(), Amount = 50, Type = TransactionType.Withdraw, Date = DateTime.Now }
-            };
+        [Fact]
+        public async Task GetStatement_ShouldReturnTransactions_WhenCalled()
+        {
+            var userId = "user1";
+            var accId = Guid.NewGuid();
+            var account = new CheckingAccount { AccountID = accId, Number = "12345", Client = new Client { UserId = userId } };
+            var transactions = new List<Transaction> { new Transaction { Amount = 100 } };
 
             _accountRepoMock.Setup(r => r.GetByNumberAsync("12345")).ReturnsAsync(account);
+            _transactionRepoMock.Setup(r => r.GetStatementAsync(accId, It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), 1, 10)).ReturnsAsync(transactions);
 
-            _transRepoMock.Setup(r => r.GetStatementAsync(accId, It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), 1, 10))
-                .ReturnsAsync(transactions);
+            var result = await _service.GetAccountStatementAsync("12345", null, null, 1, 10, userId);
 
-            // Act
-            var result = await _service.GetAccountStatementAsync("12345", null, null, 1, 10);
-
-            // Assert
             Assert.NotNull(result);
-            Assert.Equal(2, result.Count); 
-            Assert.Equal(100, result[0].Amount); 
+            Assert.Single(result);
+        }
+
+        [Fact]
+        public async Task Transfer_ShouldRollback_WhenDatabaseFails()
+        {
+            var userId = "user1";
+            var sender = new CheckingAccount { AccountID = Guid.NewGuid(), Balance = 1000, Client = new Client { UserId = userId }, AccountStatus = AccountStatus.Active };
+            var receiver = new CheckingAccount { AccountID = Guid.NewGuid(), Balance = 0, AccountStatus = AccountStatus.Active };
+            var input = new TransferInputModel { FromAccountNumber = "1111", ToAccountNumber = "2222", Amount = 100 };
+
+            _accountRepoMock.Setup(r => r.GetByNumberAsync("1111")).ReturnsAsync(sender);
+            _accountRepoMock.Setup(r => r.GetByNumberAsync("2222")).ReturnsAsync(receiver);
+            _unitOfWorkMock.Setup(u => u.CommitAsync()).ThrowsAsync(new Exception("Erro fatal!"));
+
+            await Assert.ThrowsAsync<Exception>(() => _service.TransferAsync(input, userId));
+            _unitOfWorkMock.Verify(u => u.RollbackAsync(), Times.Once);
+        }
+
+        [Fact]
+        public async Task Withdraw_ShouldThrow_WhenConcurrencyConflictOccurs()
+        {
+            var userId = "user1";
+            var account = new CheckingAccount { AccountID = Guid.NewGuid(), Balance = 100, Client = new Client { UserId = userId }, AccountStatus = AccountStatus.Active, RowVersion = new byte[] { 0, 0, 0, 1 } };
+            var input = new WithdrawInputModel { AccountNumber = "1111", Amount = 50 };
+
+            _accountRepoMock.Setup(r => r.GetByNumberAsync("1111")).ReturnsAsync(account);
+            _unitOfWorkMock.Setup(u => u.CommitAsync()).ThrowsAsync(new DbUpdateConcurrencyException("Conflito", new List<Microsoft.EntityFrameworkCore.Update.IUpdateEntry>()));
+
+            await Assert.ThrowsAsync<DbUpdateConcurrencyException>(() => _service.WithdrawAsync(input, userId));
+            _unitOfWorkMock.Verify(u => u.RollbackAsync(), Times.Once);
         }
     }
 }

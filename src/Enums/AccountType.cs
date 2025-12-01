@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.Serialization;
-
-namespace DevTrails___BankProject.Enums
+﻿namespace DevTrails___BankProject.Enums
 {
     public enum AccountType
     {

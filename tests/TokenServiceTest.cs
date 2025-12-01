@@ -25,17 +25,14 @@ namespace DevTrails.Tests
         }
 
         [Fact]
-        public void GenerateToken_ValidUser_ShouldReturnTokenString()
+        public void GenerateToken_ShouldReturnToken_WhenUserIsValid()
         {
-            // Arrange
-            var user = new User { Id = "user-guid-123", Email = "teste@email.com" };
+            var user = new User { Id = "user-guid-123", Email = "teste@email.com", UserName = "teste" };
 
-            // Act
             var token = _service.GenerateToken(user);
 
-            // Assert
-            Assert.False(string.IsNullOrEmpty(token)); 
-            Assert.Contains(".", token); 
+            Assert.False(string.IsNullOrEmpty(token));
+            Assert.Contains(".", token);
         }
     }
 }
