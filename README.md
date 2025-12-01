@@ -73,7 +73,53 @@ Implementação de **Resource-Based Authorization**.
 - **Validações:** CPF, maioridade (16+ anos), valores positivos, e e-mails válidos garantidos via `FluentValidation`.
 
 
+---
 
+##  API Endpoints e Funcionalidades
+
+Abaixo, o detalhamento do que cada controlador gerencia.
+
+### AuthController (Autenticação & Identidade)
+Responsável pela entrada segura no sistema. Utiliza **ASP.NET Core Identity**.
+
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| **POST** | `/api/auth/registrar` | Cria um novo usuário no sistema (Identity User) e vincula automaticamente a um perfil de Cliente. Já realiza a validação de formato de e-mail e força de senha. |
+| **POST** | `/api/auth/login` | Autentica as credenciais do usuário. Retorna um **Token JWT (Bearer)** que deve ser usado no cabeçalho `Authorization` de todas as requisições subsequentes. O token carrega as `Claims` de identidade do usuário. |
+
+###  AccountsController (Gestão de Contas)
+Gerencia o ciclo de vida das contas bancárias. Aplica validação estrita de **Ownership** (apenas o dono pode ver ou alterar sua conta).
+
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| **POST** | `/api/contas` | Abre uma nova conta (Corrente ou Poupança) para o usuário logado. **Regra:** Valida se o cliente já possui uma conta daquele tipo (impedindo duplicidade). |
+| **GET** | `/api/contas/{cpf}` | Lista todas as contas vinculadas a um CPF. |
+| **GET** | `/api/contas/{numero}/extrato` | Gera o histórico financeiro da conta com paginação e filtro por datas. Retorna depósitos, saques, transferências e tarifas. |
+| **PUT** | `/api/contas/{numero}/inativar` | Encerra uma conta. **Regra:** Só permite a inativação se o saldo for **Zero**. |
+| **PUT** | `/api/contas/{numero}/reativar` | Reabre uma conta previamente inativada, permitindo novas movimentações. |
+
+###  TransactionsController (Operações Financeiras)
+Implementa o padrão **Unit of Work** para garantir que transações financeiras sejam atômicas (Tudo ou Nada).
+
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| **POST** | `/api/transacoes/deposito` | Adiciona fundos a uma conta. Única operação que aumenta o saldo sem contrapartida de débito imediato (Cash-in). |
+| **POST** | `/api/transacoes/saque` | Retira fundos de uma conta. **Concorrência:** Utiliza `RowVersion` para impedir saques simultâneos que negativem a conta.  |
+| **POST** | `/api/transacoes/transferencia` | Realiza a movimentação entre contas (Internas). **Atomicidade:** Gera 3 registros em uma única transação (Débito Origem + Crédito Destino + Tarifa). Se qualquer passo falhar, o sistema realiza **Rollback** total. |
+
+### ClientsController (Dados Cadastrais)
+Gerencia os dados pessoais do correntista.
+
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| **GET** | `/api/clientes/{cpf}` | Busca os dados cadastrais (Nome, CPF) de um cliente. Protegido para que apenas o próprio usuário ou administradores possam consultar. |
+| **POST** | `/api/clientes` | (Uso Interno/Admin) Endpoint para criação de perfil de cliente, geralmente acionado automaticamente pelo fluxo de Registro de Usuário. |
+
+### Notas de Segurança dos Endpoints
+
+1.  **JWT Required:** Com exceção de `/auth`, todos os endpoints exigem um Token Bearer válido.
+2.  **Anti-IDOR:** Todos os métodos que recebem `número da conta` ou `CPF` verificam se o recurso pertence ao ID do usuário contido no Token.
+3.  **Input Validation:** Todos os `POST` e `PUT` passam pelo **FluentValidation** antes de chegar ao Controller. Requisições com dados inválidos retornam `400 Bad Request` imediatamente.
 
 ---
 
